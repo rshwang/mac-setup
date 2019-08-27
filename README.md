@@ -26,7 +26,7 @@ Homebrew是Mac系统中较好的软件管理系统，特别可以分别针对命
 
 * 源的问题
 
-由于国内直接访问Homebrew的官方源很慢（龟速那种慢），所以本脚本将源换成了中国科学技术大学USTC的源，homebrew-core, homebrew-cask以及源代码仓库全都换了。
+由于国内直接访问Homebrew的官方源很慢（龟速那种慢），所以本脚本将源换成清华大学TUNA的源，包括homebrew-core, homebrew-cask以及源代码仓库全都换了。
 
 ## 使用 🙊
 
@@ -43,7 +43,7 @@ chmod u+x install.sh &&./install.sh
 
 软件清单分两个，`cli.txt gui.txt`，cli.txt中，包含了可以使用`brew install`来安装的一些命令行软件工具，如果并非专业技术人员，所需安装的软件可能很少。gui.txt中，包含了使用`brew cask install`来安装的图形化界面工具，比如QQ，微信，腾讯视频等。
 
-![app_list](pic/app-list.jpg)
+![app_list](https://github.com/rshwang/Collections/raw/master/app-list.jpg)
 
 ```text
 #  命令行软件工具清单 cli.txt
@@ -75,5 +75,5 @@ None
 
 在我的12寸的MacBook，OS X 10.14.6的安装效果如下，因为暂时没有需要的命令行软件，所以跳过该部分安装。
 
-![install-gui](pic/app-install.jpg)
-![install-cli](pic/mac-config.jpg)
+![install-gui](https://github.com/rshwang/Collections/raw/master/app-install.jpg)
+![install-cli](https://github.com/rshwang/Collections/blob/master/mac-config.jpg)
