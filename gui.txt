@@ -8,4 +8,3 @@
 8 miniconda 开发环境管理软件
 9 sogouinput 搜狗拼音输入法
 10 baidunetdisk 百度网盘
-11 rstudio 视频通话软件
