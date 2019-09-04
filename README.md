@@ -77,3 +77,11 @@ None
 
 ![install-gui](https://github.com/rshwang/Collections/raw/master/app-install.jpg)
 ![install-cli](https://github.com/rshwang/Collections/blob/master/mac-config.jpg)
+
+## 下一步改进目标
+
+1. Mac新系统没有预装git，如何实现远程下载?
+2. 如果下载时不用git，如何同时下载软件安装文件。
+3. cli.txt 文件有内容时无法安装。
+4. 增加远程仓库切换成功提示。
+5. 安装Homebrew时会自动安装git？
