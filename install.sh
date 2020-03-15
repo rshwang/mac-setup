@@ -14,8 +14,25 @@ cat << -EOF
 #
 # 祝使用愉快。
 #
+#============================Version 1.1===============================
+# 更新内容：
+# 1. 修复新装MAC没有安装git无法使用软件的问题。
+# 2. 改变软件下载及安装方式。
+# 3. 补充需要安装的图形界面和命令行软件。
+#
 #######################################################################
 -EOF
+
+# 检测文件完整性
+echo '检测文件完整性，请稍候...'
+shasum -c checksum.sha1 > /dev/null
+
+if [[ $? -eq 0 ]]; then
+  echo '文件效验效验成功，即将开始系统安装及配置！'
+else
+  echo '文件效验不通过，请检查文件完整性或重新下载安装文件！'
+  exit 128
+fi
 
 # 全局变量
 row_number=0
@@ -42,12 +59,18 @@ install_homebrew() {
   fi
 
   echo '👍  为了让brew运行更加顺畅，将切换为清华大学TUNA提供的镜像，请稍后...'
+  
   git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-
+  echo 'origin 仓库切换成功'
+  
   git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+  echo 'Homebrew/core 远程仓库切换成功'
 
   git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+  echo 'Homebrew/cask 远程仓库切换成功'
 
+  echo '远程仓库切换完成！'
+  echo '正在检查Homebrew是否为最新版...'
   brew update
 }
 
@@ -122,9 +145,7 @@ sleep 5s
 install_homebrew
 while [[ $lo -lt 2 ]]; do
   show_menu $lo
-  if [ -s "$type"".txt" ]; then
-    :
-  else
+  if [ ! -s "$type"".txt" ]; then
     lo=`expr $lo + 1`
     echo "该软件列表中没有内容，跳过安装！"
     continue
@@ -160,7 +181,7 @@ done
 if [ -s gui.fail -o -s cli.fail ]; then
   for stwr in `ls *.fail`; do
     if [ -n $stwr ]; then
-      echo "❗️以下软件未成功安装，请检查并重新安装："
+      echo "❗️ 以下软件未成功安装，请检查并重新安装："
       cat $stwr
     fi
   done
@@ -168,17 +189,29 @@ fi
 
 rm -rf *.fail
 
-echo "⁉️下面将进行电脑个性化设置，请稍后。⁉️"
+echo " ⁉️  下面将进行电脑个性化设置，请稍后。⁉️"
+cd
 
+# 安装oh-my-zsh后命令提示符会更改登录提示符，因此此过程省略。
 # 替换用户登录提示符...
-echo "正在调整命令提示符，请输入用户密码..."
-sudo sed -i "" -e '/^PS1/{s//# PS1/; a\
-PS1="\\u: \\W\\$ "
-}' /etc/bashrc && echo "命令提示符替换成功！" && source /etc/bashrc
+# echo "正在调整命令提示符，请输入用户密码..."
+# sudo sed -i "" -e '/^PS1/{s//# PS1/; a\
+# PS1="\\u: \\W\\$ "
+# }' /etc/bashrc && echo "命令提示符替换成功！" && source /etc/bashrc
 
 # 生成用户RSA秘钥，会提示输入密码，可直接回车跳过设置密码。
 
 echo "正在生成本地SSH Key..."
 ssh-keygen -t rsa -b 4096 -C "rshwang@sina.cn"
+
+echo "安装oh-my-zsh..."
+git clone https://github.com/robbyrussell/oh-my-zsh
+if [[ $? -eq 0 ]]; then
+  echo 'oh-my-zsh下载成功，将执行安装程序！'
+  cd oh-my-zsh/tools
+  sh install.sh
+else
+  echo 'oh-my-zsh下载失败，请检查网络，重新手动下载安装！'
+fi
 
 echo "💗感谢您使用Mac自动配置程序，再见！💖"

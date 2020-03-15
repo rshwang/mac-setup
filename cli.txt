@@ -1,1 +1,7 @@
 1 unrar RAR解压缩程序
+2 fastqc 测序数据质控软件
+3 samtools DNA序列工具
+4 bioawk 生物版awk命令
+5 sratoolkit NCBI的SRA工具包
+6 git 代码托管工具
+7 r R语言核心程序

@@ -4,7 +4,7 @@
 
 ## 简介 🙉
 
-该项目为重装后的Mac的OS X系统自动安装所需软件，免去了重装系统后一个个安装的琐碎工作。所有软件主要基于Homebrew来安装命令行工具和图形界面软件。用户可根据自己的需求配置两个不同的文件中所包含的软件列表，便于重装系统后一次性安装系统所需软件。
+该项目为重装后的Mac的OS X系统自动安装所需软件，免去了重装系统后逐一安装软件及配置的琐碎工作。所有软件主要基于Homebrew来安装命令行工具和图形界面软件。用户可根据自己的需求配置两个不同的文件中所包含的软件列表，便于重装系统后一次性安装系统所需软件。
 
 1. 根据个人使用情况分别设置命令行工具和图形界面软件清单
 
@@ -13,6 +13,7 @@
 ## 要求
 
 基于macOS Mojave Version 10.14.6和Homebrew版本 2.1.4开发，不能保证过早的版本正常运行。
+__在macOS Catalina Version 10.15.2和Homebrew版本 2.2.10 更新测试成功。__
 
 ## 缘起 🙈
 
@@ -23,6 +24,7 @@ Homebrew是Mac系统中较好的软件管理系统，特别可以分别针对命
 * 安装卡顿问题
 
 如遇较大软件包或网速卡顿，安装时间消耗较长时可以直接Ctrl+C，打断当前软件包的安装，并重新运行
+Homebrew更新升级过程可能较慢，可以打断该过程，继续后续工作。
 
 * 源的问题
 
@@ -30,11 +32,12 @@ Homebrew是Mac系统中较好的软件管理系统，特别可以分别针对命
 
 ## 使用 🙊
 
-打开您喜欢的终端模拟器，简单执行下面两条命令即可
+打开MAC终端Terminal，依次执行下面两条命令：
 
 ```bash
-git clone https://github.com/rshwang/mac-setup.git && cd mac-setup
-chmod u+x install.sh &&./install.sh
+curl -L https://github.com/rshwang/mac-setup/archive/master.zip -o master.zip && unzip master.zip && cd mac-setup-master
+
+chmod u+x install.sh && ./install.sh
 ```
 
 安装软件包的时间，和您的网络情况有关，也和安装目标有关，比如安装包较大，就需要多花一点时间，请耐心等待。
@@ -47,7 +50,13 @@ chmod u+x install.sh &&./install.sh
 
 ```text
 #  命令行软件工具清单 cli.txt
-None
+1. unrar RAR解压缩程序
+2. fastqc 测序数据质控软件
+3. samtools DNA序列工具
+4. bioawk 生物版awk命令
+5. sratoolkit NCBI的SRA工具包
+6. git 代码托管工具
+7. r R语言核心程序
 
 #  图形化软件工具清单 gui.txt
 1. qq 腾讯QQ
@@ -60,6 +69,12 @@ None
 8. miniconda 开发环境管理软件
 9. sogouinput 搜狗拼音输入法
 10. baidunetdisk 百度网盘
+11. aliwangwang 阿里旺旺聊天工具
+12. virtualbox 虚拟机软件
+13. virtualbox-extension-pack 虚拟机扩展包
+14. handshaker 安卓手机连接软件
+15. java JAVA软件主程序
+16. rstudio R语言编辑神器
 
 ```
 
@@ -73,15 +88,11 @@ None
 
 ## 使用效果 🐈
 
-在我的12寸的MacBook，OS X 10.14.6的安装效果如下，因为暂时没有需要的命令行软件，所以跳过该部分安装。
+在我的12寸的MacBook，OS X 10.15.3的安装效果如下，因为暂时没有需要的命令行软件，所以跳过该部分安装。
 
 ![install-gui](https://github.com/rshwang/Collections/raw/master/app-install.jpg)
 ![install-cli](https://github.com/rshwang/Collections/blob/master/mac-config.jpg)
 
 ## 下一步改进目标
 
-1. Mac新系统没有预装git，如何实现远程下载?
-2. 如果下载时不用git，如何同时下载软件安装文件。
-3. cli.txt 文件有内容时无法安装。
-4. 增加远程仓库切换成功提示。
-5. 安装Homebrew时会自动安装git？
+1. 安装Homebrew时会自动安装git？
